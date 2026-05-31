@@ -419,6 +419,102 @@ Em ambiente produtivo, a solução poderia evoluir com:
 
 ---
 
+# Considerações para Ambiente Produtivo
+
+A solução apresentada foi desenvolvida com foco no atendimento dos requisitos do desafio técnico, priorizando clareza, simplicidade e facilidade de avaliação.
+
+Em um ambiente corporativo, diversas atividades atualmente executadas durante a configuração inicial seriam automatizadas através dos próprios pipelines e mecanismos de infraestrutura como código.
+
+## Provisionamento Automatizado
+
+Neste desafio, os Schemas, Volumes e tabelas foram criados durante o processo de desenvolvimento para facilitar a demonstração da arquitetura proposta.
+
+Em um cenário produtivo, o pipeline seria responsável por validar a existência desses objetos e criá-los automaticamente quando necessário.
+
+Exemplos:
+
+* Criação automática de Schemas no Unity Catalog.
+* Criação automática de Volumes.
+* Criação automática de tabelas Delta.
+* Evolução controlada de Schema (Schema Evolution).
+* Registro automático de metadados.
+
+Dessa forma, o ambiente poderia ser provisionado do zero sem necessidade de intervenção manual.
+
+---
+
+## Orquestração End-to-End
+
+A solução poderia ser executada integralmente através de uma única pipeline orquestrada.
+
+Fluxo esperado:
+
+1. Download dos arquivos da NYC TLC.
+2. Armazenamento na Landing Zone.
+3. Ingestão para Bronze.
+4. Tratamento e padronização na Silver.
+5. Geração das tabelas analíticas na Gold.
+6. Execução de validações de qualidade.
+7. Publicação para consumo dos usuários finais.
+
+Em produção, essa orquestração poderia ser implementada utilizando Databricks Workflows, Apache Airflow ou outra ferramenta corporativa equivalente.
+
+---
+
+## Processamento Incremental
+
+Para fins do desafio foi realizado processamento do histórico completo referente ao período solicitado.
+
+Em um ambiente produtivo, a solução seria adaptada para processamento incremental, evitando releitura completa dos dados e reduzindo custos computacionais.
+
+Possíveis abordagens:
+
+* Auto Loader.
+* Delta Live Tables.
+* CDC (Change Data Capture).
+* Controle de Watermark.
+* Controle de arquivos processados.
+
+---
+
+## Governança e Observabilidade
+
+Em ambientes corporativos, recomenda-se complementar a solução com mecanismos de governança e monitoramento operacional.
+
+Exemplos:
+
+* Auditoria de execução.
+* Controle de lineage.
+* Logs estruturados.
+* Alertas automáticos.
+* Monitoramento de SLA.
+* Métricas de qualidade de dados.
+* Catálogo corporativo de dados.
+
+O Unity Catalog já fornece uma base sólida para evolução desses controles.
+
+---
+
+## Escalabilidade
+
+A arquitetura foi projetada seguindo conceitos de Data Lakehouse e Arquitetura Medalhão, permitindo crescimento do volume de dados sem necessidade de mudanças estruturais significativas.
+
+A mesma abordagem poderia ser facilmente adaptada para:
+
+* Amazon S3.
+* Azure Data Lake Storage.
+* Google Cloud Storage.
+* Databricks Enterprise.
+* Ambientes multi-catálogo e multi-domínio.
+
+---
+
+## Consideração Final
+
+A implementação apresentada foi simplificada para fins de avaliação técnica, porém a arquitetura foi concebida considerando práticas modernas de Engenharia e Arquitetura de Dados, incluindo automação, governança, processamento incremental, observabilidade e escalabilidade normalmente utilizadas em ambientes corporativos.
+
+---
+
 ## Conclusão
 
 A solução atende aos requisitos do desafio ao realizar a ingestão dos dados da NYC TLC, armazenar os arquivos originais em uma Landing Zone, transformar os dados com PySpark, disponibilizar tabelas Delta em arquitetura Medalhão e responder às análises solicitadas via SQL.
