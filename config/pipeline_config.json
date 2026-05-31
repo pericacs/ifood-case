@@ -1,0 +1,15 @@
+{
+  "environment": "community",
+  "taxi_type": "yellow",
+  "year": 2023,
+  "months": [1, 2, 3, 4, 5],
+  "source_base_url": "https://d37ci6vzurychx.cloudfront.net/trip-data",
+  "base_path_community": "dbfs:/FileStore/ifood_case",
+  "base_path_production": "s3://ifood-case-data-lake",
+  "databases": {
+    "raw": "raw",
+    "bronze": "bronze",
+    "silver": "silver",
+    "gold": "gold"
+  }
+}
